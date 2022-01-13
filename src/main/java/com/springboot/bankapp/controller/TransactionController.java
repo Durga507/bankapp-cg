@@ -127,21 +127,6 @@ public class TransactionController {
 		} 
 
 		return list; 
-}
-	@GetMapping("/balance")
-	public double accountBalance(Principal principal) {
-		/*
-		 * Balance enquiry
-		 * 
-		 * step-1
-		 * fetch account number based on username
-		 */
-		
-		String username=principal.getName();
-		String accountNumber=transactionService.fetchFromAccountNumber(username);
-		
-		Account account=transactionService.getAccountByAccountNumber(accountNumber);
-		return account.getBalance();
 	}
 	@PostMapping("/help")
 	public Help postQnA(@RequestBody Help help) {
@@ -184,5 +169,19 @@ String accountNumber = transactionService.fetchFromAccountNumber(username);
 		transaction.setDateOfTransaction(new Date());
 		
 		return transactionService.saveTransaction(transaction);
+	}
+	@GetMapping("/balance")
+	public double accountBalance(Principal principal) {
+		/*
+		 * balance enquiry
+		 * 
+		 * step-1
+		 * fetch account number based on username
+		 */
+		String username=principal.getName();
+		String accountNumber=transactionService.fetchFromAccountNumber(username);
+		
+		Account account=transactionService.getAccountByAccountNumber(accountNumber);
+		return account.getBalance();
 	}
 }
