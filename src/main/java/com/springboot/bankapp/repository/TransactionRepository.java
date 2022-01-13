@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.springboot.bankapp.model.Account;
+import com.springboot.bankapp.model.Help;
 import com.springboot.bankapp.model.Transaction;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
@@ -28,4 +29,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 	
 	@Query("select a from Account a where a.accountNumber=?1")
 	Account getAccountByAccountNumber(String accountNumber);
+	
+	@Query("select h from Help h where h.id=?1")
+	Help getQnA(Long id);
 }

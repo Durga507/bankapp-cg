@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.bankapp.dto.Transfer;
 import com.springboot.bankapp.model.Account;
+import com.springboot.bankapp.model.Help;
 import com.springboot.bankapp.model.Transaction;
 import com.springboot.bankapp.service.TransactionService;
 
@@ -141,6 +142,14 @@ public class TransactionController {
 		
 		Account account=transactionService.getAccountByAccountNumber(accountNumber);
 		return account.getBalance();
+	}
+	@PostMapping("/help")
+	public Help postQnA(@RequestBody Help help) {
+		return transactionService.postQnA(help);
+	}
+	@GetMapping("/help/{id}")
+	public Help getQnA(@PathVariable("id") Long id) {
+		return transactionService.getQnA(id);
 	}
 	@PostMapping("/deposit/{amount}")
 	public Transaction deDeposit(Principal principal,@PathVariable("amount") double amount) {
